@@ -6,8 +6,10 @@
         <datepicker 
           v-model="selectedDate"
           :mondayFirst="true"
-          :disabledDates="disabledDates">
+          :disabledDates="disabledDates"
+          inputClass="text-center h5 datepicker-input">
         </datepicker>
+        <b-icon-calendar2 class="h4 ml-2"></b-icon-calendar2>
       </div>
     </div>
 
@@ -73,5 +75,13 @@ export default {
 <style scoped>
   .dispatch-scheduler {
     max-width: 30vw;
+  }
+</style>
+
+<style>
+  .datepicker-input, .datepicker-input:active, .datepicker-input:focus {
+    border: none;
+    border-bottom: 1px dashed;
+    outline: none;
   }
 </style>
