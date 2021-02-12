@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <dispatch-scheduler />
+    <dispatch-scheduler class="mx-auto" />
   </div>
 </template>
 
