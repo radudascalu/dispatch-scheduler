@@ -2,10 +2,13 @@
   <b-card class="dispatch-scheduler">
     <div class="mb-5">
       <h6>Pick a dispatch date:</h6>
-      <datepicker 
-        v-model="selectedDate"
-        :mondayFirst="true">
-      </datepicker>
+      <div class="d-flex justify-content-center">
+        <datepicker 
+          v-model="selectedDate"
+          :mondayFirst="true"
+          :disabledDates="disabledDates">
+        </datepicker>
+      </div>
     </div>
 
     <div>
@@ -23,6 +26,27 @@ export default {
   data: function() { 
     return { 
       selectedDate: new Date(),
+      disabledDates: {
+        customPredictor (date) {
+          const weekendDays = [0, 6]
+          const holidays = [{
+            day: 25,
+            month: 12
+          }, {
+            day: 1,
+            month: 1
+          }]
+          const utcCutoffTime = 12;
+          const now = new Date();
+          const today = new Date();
+          today.setHours(0,0,0,0);
+
+          return weekendDays.includes(date.getDay())
+             || holidays.find(h => h.day == date.getDate() && h.month == date.getMonth() + 1)
+             || (date < today)
+             || (date.toDateString() == today.toDateString() && utcCutoffTime <= now.getUTCHours())
+        }
+      }
     }
   },
   components: {
